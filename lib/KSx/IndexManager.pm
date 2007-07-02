@@ -4,7 +4,7 @@ use warnings;
 package KSx::IndexManager;
 
 use 5.008003; # KinoSearch requires this
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 use base qw(Class::Accessor::Grouped);
 
 __PACKAGE__->mk_group_accessors(simple    => qw(root schema context _lock_fh));
@@ -183,7 +183,7 @@ KSx::IndexManager - high-level invindex management interface
 
 =head1 VERSION
 
- 0.001
+ 0.002
 
 =head1 SYNOPSIS
 

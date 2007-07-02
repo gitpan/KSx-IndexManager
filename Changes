@@ -1,5 +1,9 @@
 Revision history for KSx-IndexManager
 
-0.001   2007-06-30
+0.002   2007-07-02
+
+        Add eg/ to MANIFEST
+
+0.001   2007-07-01
 
         First release.
