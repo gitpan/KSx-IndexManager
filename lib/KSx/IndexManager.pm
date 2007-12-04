@@ -4,7 +4,7 @@ use warnings;
 package KSx::IndexManager;
 
 use 5.008003; # KinoSearch requires this
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 use base qw(Class::Accessor::Grouped);
 
 __PACKAGE__->mk_group_accessors(simple    => qw(root schema context _lock_fh));
@@ -104,7 +104,9 @@ sub _add_one_doc {
   my ($self, $i, $obj, $opt) = @_;
   my $inv = $self->_load($i, $opt);
   $self->call_self_plugins(before_add_doc => $obj);
-  $inv->add_doc($self->to_doc($obj));
+  for my $doc ($self->to_doc($obj)) {
+    $inv->add_doc($doc);
+  }
   # wish we could call it with the new document or something
   $self->call_self_plugins(after_add_doc => $obj);
 }
@@ -183,7 +185,7 @@ KSx::IndexManager - high-level invindex management interface
 
 =head1 VERSION
 
- 0.002
+ 0.003
 
 =head1 SYNOPSIS
 
