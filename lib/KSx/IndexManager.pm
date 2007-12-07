@@ -3,8 +3,8 @@ use warnings;
 
 package KSx::IndexManager;
 
-use 5.008003; # KinoSearch requires this
-our $VERSION = '0.003';
+use 5.00.004; # KinoSearch requires this
+our $VERSION = '0.004';
 use base qw(Class::Accessor::Grouped);
 
 __PACKAGE__->mk_group_accessors(simple    => qw(root schema context _lock_fh));
@@ -128,10 +128,11 @@ sub add_docs {
   } else {
     die "unhandled argument: $docs";
   }
-  return if $opt->{mode} eq 'open' and not $created;
+  return 0 if $opt->{mode} eq 'open' and not $created;
   $_->finish(
     optimize => $opt->{optimize} || 0,
   ) for values %$i;
+  return $created;
 }
 
 sub append { shift->add_docs({ mode => 'open'    }, @_) }
@@ -185,7 +186,7 @@ KSx::IndexManager - high-level invindex management interface
 
 =head1 VERSION
 
- 0.003
+ 0.004
 
 =head1 SYNOPSIS
 
@@ -307,6 +308,8 @@ C<write> and C<append> are convenient wrappers around C<add_docs> with the
 The documents to be added may be passed in an arrayref or an iterator.  Any
 object with a 'next' method will be treated as an iterator and used until
 exhausted.
+
+Returns the number of objects processed.
 
 =head2 to_doc
 

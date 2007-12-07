@@ -22,5 +22,5 @@ requires:
   Data::OptList: 0.101
   KinoSearch: 0.20_04
   Module::Pluggable: 3.1
-  perl: 5.8.3
-version: 0.003
+  perl: 5.00.004
+version: 0.004
